@@ -4,10 +4,14 @@ body {
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background: rgb(231,138,255);
-    /* background: linear-gradient(rgba(231,138,255,1) 0%, rgba(128,221,252,1) 100%); */
     background: linear-gradient(rgba(231,138,255,1) 0%, rgba(136,225,255,1) 73%);
-    
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
@@ -18,14 +22,14 @@ body {
     justify-content: center;
 }
 
-.container ul {
+.container ul.timeline {
     list-style: none;
     margin: 0;
     padding: 0;
     position: relative;
 }
 
-.container ul::before {
+.container ul.timeline::before {
     content: '';
     width: 0;
     height: 100%;
@@ -35,7 +39,7 @@ body {
     left: 0;
 }
 
-.container ul li {
+.container ul.timeline li {
     margin: 40px 30px;
     position: relative;
     background-color: rgba(255, 255, 255, 0.2);
@@ -45,7 +49,7 @@ body {
     box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .08)
 }
 
-.container ul li > span {
+.container ul.timeline li > span {
     width: 0;
     height: 100%;
     border: 1px solid #fff;
@@ -54,7 +58,7 @@ body {
     left: -30px;
 }
 
-.container ul li > span::before, .container ul li > span::after {
+.container ul.timeline li > span::before, .container ul.timeline li > span::after {
     content: '';
     width: 10px;
     height: 10px;
@@ -65,15 +69,15 @@ body {
     left: -6px;
 }
 
-.container ul li > span::before {
+.container ul.timeline li > span::before {
     top: -5px;
 }
 
-.container ul li > span::after {
+.container ul.timeline li > span::after {
     top:calc(100% - 5px);
 }
 
-.container ul li > div {
+.container ul.timeline li > div {
     margin-left: 10px;  
 }
 
@@ -114,7 +118,7 @@ body {
 
 /* loader */
 
-.loading{
+.loader{
     width: 200px;
     height: 200px;
     box-sizing: border-box;
@@ -122,9 +126,9 @@ body {
     border-top: 10px solid #e74c3c;
     position: relative;
     animation: a1 2s linear infinite;
-  }
-  
-  .loading::before,.loading::after{
+}
+
+.loader::before,.loader::after{
     content: '';
     width: 200px;
     height: 200px;
@@ -133,19 +137,19 @@ body {
     top: -10px;
     box-sizing: border-box;
     border-radius: 50%;
-  }
-  
-  .loading::before{
+}
+
+.loader::before{
     border-top: 10px solid #e67e22;
     transform: rotate(120deg);
-  }
-  
-  .loading::after{
+}
+
+.loader::after{
     border-top: 10px solid #3498db;
     transform: rotate(240deg);
-  }
-  
-  .loading span{
+}
+
+.loader span{
     position: absolute;
     width: 200px;
     height: 200px;
@@ -153,17 +157,107 @@ body {
     text-align: center;
     line-height: 200px;
     animation: a2 2s linear infinite;
-  }
-  
-  @keyframes a1 {
+}
+
+@keyframes a1 {
     to{
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  @keyframes a2 {
+}
+
+@keyframes a2 {
     to{
-      transform: rotate(-360deg);
+        transform: rotate(-360deg);
     }
-  }
-  
+}
+
+/* hover */
+
+.container ul.gradient-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container ul.gradient-list li {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.container ul.gradient-list li:after, .container ul.gradient-list li:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    background: #000;
+    filter: blur(20px);
+    opacity: 0;
+    transition: 1s;
+    z-index: -1;
+}
+
+.container ul.gradient-list li:after {
+    filter: blur(40px);
+}
+
+.container ul.gradient-list li:hover::before, .container ul.gradient-list li:hover:after {
+    opacity: 1;
+}
+
+.container ul.gradient-list li a{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    text-align: center;
+    line-height: 80px;
+    color: #fff;
+    font-size: 36px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.container ul.gradient-list li a .fa, .container ul.gradient-list li a .far, .container ul.gradient-list li a .fas, .container ul.gradient-list li a .fab {
+    text-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transition: 0.5s;
+    transform: rotateY(0deg) scale(0.8);
+    opacity: 0.2;
+}
+
+.container ul.gradient-list li a:hover .fa, .container ul.gradient-list li a:hover .far, .container ul.gradient-list li a:hover .fas, .container ul.gradient-list li a:hover .fab {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.container ul.gradient-list li:nth-child(1) a,
+.container ul.gradient-list li:nth-child(1):before,
+.container ul.gradient-list li:nth-child(1):after {
+    background: linear-gradient(45deg,#ff0057,#e64a19);
+}
+
+.container ul.gradient-list li:nth-child(2) a,
+.container ul.gradient-list li:nth-child(2):before,
+.container ul.gradient-list li:nth-child(2):after {
+    background: linear-gradient(45deg,#89ff00,#00bcd4);
+}
+
+.container ul.gradient-list li:nth-child(3) a,
+.container ul.gradient-list li:nth-child(3):before,
+.container ul.gradient-list li:nth-child(3):after {
+    background: linear-gradient(45deg,#e91e63,#5d02ff);
+}
+
+.container ul.gradient-list li:nth-child(4) a,
+.container ul.gradient-list li:nth-child(4):before,
+.container ul.gradient-list li:nth-child(4):after {
+    background: linear-gradient(45deg,#ff0000,#ffc107);
+}
